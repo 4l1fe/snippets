@@ -3,6 +3,10 @@ import logging
 import logging.handlers
 
 LOG_FILENAME = 'log2.txt'
+<<<<<<< HEAD
+=======
+logging.basicConfig(format='%(levelname)s %(asctime)s: %(message)s',datefmt='%Y-%m-%d %H:%M:%S')
+>>>>>>> ce9a77f711412ed0152e9e5fe3ef527b937c8078
 
 my_logger = logging.getLogger('MyLogger')
 my_logger.setLevel(logging.DEBUG)

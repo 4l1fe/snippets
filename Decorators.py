@@ -184,6 +184,7 @@
 #декрорирование МЕТОДОВ класса на этапе создания объекта класса
 from types import FunctionType
 
+<<<<<<< HEAD
 
 def counter(func):
     calls = 0
@@ -217,6 +218,32 @@ class Person: # Применяет декоратор tracer к методам
     def giveRaise(self, percent):
         self.pay *= (1.0 + percent)
 
+=======
+def tracer(func):
+    calls = 0
+    def onCall(*args, **kwargs):
+        nonlocal calls
+        calls += 1
+        print('call %s to %s' % (calls, func.__name__))
+        return func(*args, **kwargs)
+    return onCall
+
+def decorateAll(decorator):
+    def DecoDecorate(aClass):
+        for attr, attrval in aClass.__dict__.items():
+            if type(attrval) is FunctionType:
+                setattr(aClass, attr, decorator(attrval))
+        return aClass
+    return DecoDecorate
+
+@decorateAll(tracer)
+class Person: # Применяет декоратор tracer к методам
+    def __init__(self, name, pay):
+        self.name = name
+        self.pay = pay
+    def giveRaise(self, percent):
+        self.pay *= (1.0 + percent)
+>>>>>>> ce9a77f711412ed0152e9e5fe3ef527b937c8078
     def lastName(self):
         return self.name.split()[-1]
 
