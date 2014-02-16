@@ -1,0 +1,44 @@
+<objects>
+
+        <object name="ИмяОбъекта">
+        <field name="ИмяПоля" type="int" />
+        <field name="Поле2" type="float" />
+        <method name="ИмяМетода" return="float" type="Python">
+            <argument name="condition" type="bool" />
+            <argument name="value" type="float" />
+            <body>
+                if condition:
+                    return value * value
+                else:
+                    for _ in range(100): value *= 1.1
+                    return value
+            </body>
+        </method>
+        <method name="НайтиПользователя" return="int" type="SQL">
+            <argument name="name" type="text"/>
+            <body>
+                SELECT user.id FROM user WHERE user.login = :name;
+            </body>
+        </method>
+    </object>
+
+    <object name="CustomClass">
+        <field name="int_field" type="int" />
+        <field name="float_field" type="float" />
+        <method name="concatenation" return="str" type="Python">
+            <argument name="f_string" type="str" />
+            <argument name="s_string" type="str" />
+            <argument name="th_string" type="str" />
+            <body>
+                res = f_string + s_string + th_string
+                return res
+            </body>
+        </method>
+        <method name="find_user" return="int" type="SQL">
+            <argument name="email" type="text"/>
+            <body>
+                SELECT user.id FROM user WHERE user.email = :email;
+            </body>
+        </method>
+    </object>
+</objects>
