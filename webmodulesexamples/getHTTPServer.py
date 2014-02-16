@@ -2,12 +2,15 @@
 from http import server
 from urllib import parse
 
+<<<<<<< HEAD
 HOST = '127.0.0.1'
 PORT = 80
 
 
 
 
+=======
+>>>>>>> ce9a77f711412ed0152e9e5fe3ef527b937c8078
 class GetHandler(server.BaseHTTPRequestHandler):
 
     def do_GET(self):

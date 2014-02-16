@@ -4,6 +4,7 @@ try:
     from urllib.request import urlopen
 except:
     from urllib import urlopen
+<<<<<<< HEAD
 
 
 site = 'http://crate.io/?has_releases=on&q={search}'
@@ -12,6 +13,15 @@ search = 'http'
 page = BeautifulSoup(urlopen(site.format(search=search)))
 # page = BeautifulSoup(requests.get(site.format('/?has_releases=on&q={search}').format(search=search)).content)
 
+=======
+import requests
+
+
+site = 'http://crate.io{0}'
+search = 'event'
+page = BeautifulSoup(urlopen(site.format('/?has_releases=on&q={search}').format(search=search)))
+# page = BeautifulSoup(requests.get(site.format('/?has_releases=on&q={search}').format(search=search)).content)
+>>>>>>> ce9a77f711412ed0152e9e5fe3ef527b937c8078
 table = []
 
 while True:
