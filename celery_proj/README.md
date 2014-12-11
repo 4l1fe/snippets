@@ -1,0 +1,1 @@
+Rabbitmq examples use pika and simple celery application
