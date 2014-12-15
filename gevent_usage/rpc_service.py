@@ -1,13 +1,11 @@
 # coding: utf-8
-# from utils.connection import create_session, db_connect, mongo_connect
 import argparse
 import zerorpc
 from sqlalchemy import create_engine
 from sqlalchemy.engine.url import URL
 from time import sleep
+from random import uniform
 from gevent import monkey; monkey.patch_all()
-# from gevent import sleep, spawn, joinall
-# from green_sqla import make_psycopg_green;make_psycopg_green()
 import gevent_psycopg2; gevent_psycopg2.monkey_patch()
 
 
@@ -20,15 +18,15 @@ class Service(object):
               'host': 'localhost',
               'port': '5432',
               'database': 'postgres'}
-        self.engine = create_engine(URL(**db))
-        self.connection = self.engine.connect()
+        self.engine = create_engine(URL(**db), pool_size=50)
 
-    def route(self):
-        print('connected')
-        # sleep(10)
-        resp = self.connection.execute('''select pg_sleep(10)''')
-        print('woke up')
-        # row = resp.fetchone()
+    def route(self, IPC_pack):
+        connection = self.engine.connect()
+        print('connected ', connection)
+        time = uniform(0.01, 0.02)
+        resp = connection.execute('''select pg_sleep({})'''.format(time))
+        print('woke up ', connection)
+        connection.close()
         return 'end'
 
 
