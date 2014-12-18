@@ -10,8 +10,8 @@ from sqlalchemy import Column, Integer, DateTime, String, desc, Text
 from sqlalchemy_utils import ChoiceType
 from time import sleep
 from random import uniform
-from gevent import monkey; monkey.patch_all()
-import gevent_psycopg2; gevent_psycopg2.monkey_patch()
+# from gevent import monkey; monkey.patch_all()
+# import gevent_psycopg2; gevent_psycopg2.monkey_patch()
 
 
 Base = declarative_base()
@@ -57,7 +57,7 @@ class Service(object):
               'host': 'localhost',
               'port': '5432',
               'database': 'next_tv'}
-        self.engine = create_engine(URL(**db), pool_size=50)
+        self.engine = create_engine(URL(**db), pool_size=10)
         self.__Session = sessionmaker(bind=self.engine)
 
     def route(self, IPC_pack):
@@ -65,11 +65,11 @@ class Service(object):
         # connection = self.engine.connect()
         print('connected ', route_s)
         print(self)
-        time = 0.1
-        resp = route_s.execute('''select pg_sleep({})'''.format(time))
-        # resp = len(route_s.query(News).all())
+        # time = uniform(0.01, 0.02)
+        # resp = route_s.execute('''select pg_sleep({})'''.format(time))
+        resp = len(route_s.query(News).all())
         print('woke up ', route_s)
-        # print(resp)
+        print(resp)
         # connection.close()
         route_s.close()
         return 'end'
